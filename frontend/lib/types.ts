@@ -12,8 +12,16 @@ export interface Message {
   role: "user" | "assistant";
   content: string;
   route?: Route;
+  reason?: string;
   citations?: Citation[];
   attachment?: UploadedFile;
+}
+
+export interface ChatResponse {
+  answer: string;
+  route: Route;
+  reason?: string;
+  citations: Citation[];
 }
 
 export interface ChatRequest {
@@ -23,11 +31,6 @@ export interface ChatRequest {
   file_id?: string;
 }
 
-export interface ChatResponse {
-  answer: string;
-  route: Route;
-  citations: Citation[];
-}
 
 export interface Conversation {
   id: string;

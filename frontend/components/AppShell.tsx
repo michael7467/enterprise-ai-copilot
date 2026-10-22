@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import ChatWindow from "@/components/chat/ChatWindow";
-import type { Conversation, UserRole } from "@/lib/types";
+import SourcesPanel from "@/components/documents/SourcesPanel";
+import type { Conversation, Message, UserRole } from "@/lib/types";
 
 function makeTitle(text: string) {
   return text.length > 40 ? text.slice(0, 40).trimEnd() + "…" : text;
@@ -14,15 +15,22 @@ export default function AppShell() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [chatKey, setChatKey] = useState(0);
+  const [sourceMsg, setSourceMsg] = useState<Message | null>(null);
+  const [sourceIndex, setSourceIndex] = useState(0);
+
+  function resetChat() {
+    setChatKey((k) => k + 1);
+    setSourceMsg(null);
+  }
 
   function handleNewChat() {
     setActiveId(null);
-    setChatKey((k) => k + 1);
+    resetChat();
   }
 
   function handleSelect(id: string) {
     setActiveId(id);
-    setChatKey((k) => k + 1);
+    resetChat();
   }
 
   function handleFirstMessage(text: string) {
@@ -42,8 +50,22 @@ export default function AppShell() {
         onRoleChange={setRole}
       />
       <main className="min-w-0 flex-1">
-        <ChatWindow key={chatKey} userRole={role} onFirstMessage={handleFirstMessage} />
+        <ChatWindow
+          key={chatKey}
+          userRole={role}
+          onFirstMessage={handleFirstMessage}
+          onSelectSource={(m, i) => {
+            setSourceMsg(m);
+            setSourceIndex(i);
+          }}
+        />
       </main>
+      <SourcesPanel
+        message={sourceMsg}
+        selectedIndex={sourceIndex}
+        onSelect={setSourceIndex}
+        onClose={() => setSourceMsg(null)}
+      />
     </div>
   );
 }

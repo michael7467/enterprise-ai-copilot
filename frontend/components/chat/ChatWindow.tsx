@@ -9,12 +9,13 @@ import AttachmentCard from "@/components/documents/AttachmentCard";
 const ACCEPTED = ".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp";
 const MAX_SIZE_MB = 20;
 
+
 interface ChatWindowProps {
   userRole: string;
   onFirstMessage?: (text: string) => void;
+  onSelectSource?: (message: Message, citationIndex: number) => void;
 }
-
-export default function ChatWindow({ userRole, onFirstMessage }: ChatWindowProps) {
+export default function ChatWindow({ userRole, onFirstMessage, onSelectSource }: ChatWindowProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,7 @@ export default function ChatWindow({ userRole, onFirstMessage }: ChatWindowProps
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selected, setSelected] = useState<{ msg: number; cit: number } | null>(null);
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -62,7 +64,7 @@ export default function ChatWindow({ userRole, onFirstMessage }: ChatWindowProps
       });
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: res.answer, route: res.route, citations: res.citations },
+                { role: "assistant", content: res.answer, route: res.route, reason: res.reason, citations: res.citations },
       ]);
     } catch (e) {
       setMessages((m) => [...m, { role: "assistant", content: `Error: ${(e as Error).message}` }]);
@@ -82,8 +84,16 @@ export default function ChatWindow({ userRole, onFirstMessage }: ChatWindowProps
             </p>
           </div>
         )}
-        {messages.map((m, i) => (
-          <MessageBubble key={i} message={m} />
+           {messages.map((m, i) => (
+          <MessageBubble
+            key={i}
+            message={m}
+            selectedCitation={selected?.msg === i ? selected.cit : null}
+            onCitationClick={(cit) => {
+              setSelected({ msg: i, cit });
+              onSelectSource?.(m, cit);
+            }}
+          />
         ))}
         {loading && <div className="text-sm text-gray-600">Thinking…</div>}
       </div>

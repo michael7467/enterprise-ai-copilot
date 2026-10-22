@@ -1,5 +1,10 @@
 import type { Message, Route } from "@/lib/types";
 import AttachmentCard from "@/components/documents/AttachmentCard";
+interface Props {
+  message: Message;
+  selectedCitation?: number | null;
+  onCitationClick?: (index: number) => void;
+}
 
 const ROUTE_STYLES: Record<Route, { label: string; className: string }> = {
   direct: { label: "Direct answer", className: "bg-gray-100 text-gray-700" },
@@ -8,7 +13,7 @@ const ROUTE_STYLES: Record<Route, { label: string; className: string }> = {
   vision: { label: "Image", className: "bg-[#E6F4F1] text-[#0F5E52]" },
 };
 
-export default function MessageBubble({ message }: { message: Message }) {
+export default function MessageBubble({ message, selectedCitation, onCitationClick }: Props) {
   if (message.role === "user") {
     return (
       <div className="flex flex-col items-end gap-1.5">
@@ -35,10 +40,16 @@ export default function MessageBubble({ message }: { message: Message }) {
       {message.citations && message.citations.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {message.citations.map((c, i) => (
-            <button
+                     <button
               key={i}
               type="button"
-              className="min-h-8 rounded-md border border-[#C7D3F7] bg-white px-2.5 text-[13px] text-[#1E3FAE] hover:bg-[#EEF2FD]"
+              onClick={() => onCitationClick?.(i)}
+              aria-pressed={selectedCitation === i}
+              className={`min-h-8 rounded-md border px-2.5 text-[13px] text-[#1E3FAE] ${
+                selectedCitation === i
+                  ? "border-[#1E3FAE] bg-[#EEF2FD]"
+                  : "border-[#C7D3F7] bg-white hover:bg-[#EEF2FD]"
+              }`}
             >
               {c.source}{c.page ? ` · p. ${c.page}` : ""}
             </button>

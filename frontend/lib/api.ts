@@ -51,26 +51,35 @@ async function mockChat(req: ChatRequest): Promise<ChatResponse> {
     return {
       answer: `[vision] Mock description of ${file.filename} for: "${req.message}"`,
       route: "vision",
-      citations: [{ source: file.filename }],
+      reason: "An image is attached.",
+      citations: [{ source: file.filename, snippet: "Whole image" }],
     };
   }
   if (file) {
     return {
       answer: `[uploaded_file] Mock answer from ${file.filename} to: "${req.message}"`,
       route: "uploaded_file",
-      citations: [{ source: file.filename, page: 4 }, { source: file.filename, page: 17 }],
+      reason: "A document is attached and the question refers to it.",
+      citations: [
+        { source: file.filename, page: 4, snippet: "[Executive summary text will appear here]" },
+        { source: file.filename, page: 17, snippet: "[Revenue table text will appear here]" },
+      ],
     };
   }
   if (/policy|our|leave|company/i.test(req.message)) {
     return {
       answer: `[knowledge_base] Mock answer to: "${req.message}" (role: ${req.user_role})`,
       route: "knowledge_base",
-      citations: [{ source: "HR_Handbook.pdf", page: 12 }],
+      reason: "The question mentions company-specific terms.",
+      citations: [
+        { source: "HR_Handbook.pdf", page: 12, snippet: "[Leave policy section will appear here]" },
+      ],
     };
   }
   return {
     answer: `[direct] Mock answer to: "${req.message}" (role: ${req.user_role})`,
     route: "direct",
+    reason: "General question; no company documents needed.",
     citations: [],
   };
 }
