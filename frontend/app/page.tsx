@@ -1,5 +1,5 @@
-   import ChatWindow from "@/components/chat/ChatWindow";
+import AppShell from "@/components/AppShell";
 
-   export default function Home() {
-     return <ChatWindow />;
-   }
+export default function Home() {
+  return <AppShell />;
+}
