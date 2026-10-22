@@ -13,6 +13,7 @@ export interface Message {
   content: string;
   route?: Route;
   citations?: Citation[];
+  attachment?: UploadedFile;
 }
 
 export interface ChatRequest {
@@ -31,4 +32,11 @@ export interface ChatResponse {
 export interface Conversation {
   id: string;
   title: string;
+}
+
+export interface UploadedFile {
+  file_id: string;
+  filename: string;
+  size: number;
+  kind: "document" | "image";
 }

@@ -1,4 +1,5 @@
 import type { Message, Route } from "@/lib/types";
+import AttachmentCard from "@/components/documents/AttachmentCard";
 
 const ROUTE_STYLES: Record<Route, { label: string; className: string }> = {
   direct: { label: "Direct answer", className: "bg-gray-100 text-gray-700" },
@@ -10,7 +11,8 @@ const ROUTE_STYLES: Record<Route, { label: string; className: string }> = {
 export default function MessageBubble({ message }: { message: Message }) {
   if (message.role === "user") {
     return (
-      <div className="flex justify-end">
+      <div className="flex flex-col items-end gap-1.5">
+        {message.attachment && <AttachmentCard file={message.attachment} />}
         <div className="max-w-[75%] rounded-2xl rounded-br-sm bg-[#2F5BEA] px-4 py-3 text-[15px] leading-relaxed text-white">
           {message.content}
         </div>
