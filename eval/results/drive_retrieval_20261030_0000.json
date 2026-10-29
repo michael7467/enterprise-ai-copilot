@@ -1,0 +1,586 @@
+{
+  "run_at": "2026-10-30T00:00:11",
+  "index": "drive_chunks_structure_v1",
+  "corpus": "5,000 Drive documents (EnterpriseRAG-Bench), structure_v1 chunks",
+  "questions": 42,
+  "config": {
+    "top_chunks": 100,
+    "num_candidates": 500,
+    "rrf_k": 60,
+    "embedding_model": "BAAI/bge-m3",
+    "bm25_analyzer": "english"
+  },
+  "metrics": {
+    "BM25": {
+      "recall@1": 0.5952380952380952,
+      "recall@5": 0.7857142857142857,
+      "recall@10": 0.8809523809523809,
+      "MRR": 0.689346185334037
+    },
+    "Semantic (BGE-M3)": {
+      "recall@1": 0.47619047619047616,
+      "recall@5": 0.5476190476190477,
+      "recall@10": 0.6666666666666666,
+      "MRR": 0.5342583649790069
+    },
+    "Hybrid (RRF)": {
+      "recall@1": 0.6190476190476191,
+      "recall@5": 0.8095238095238095,
+      "recall@10": 0.9285714285714286,
+      "MRR": 0.7034600375914741
+    }
+  },
+  "median_latency_ms": {
+    "BM25": 51.801750000095126,
+    "Semantic (BGE-M3)": 65.52790000000641,
+    "Hybrid (RRF)": 120.2123999999003
+  },
+  "per_question": [
+    {
+      "question_id": "qst_0006",
+      "question": "In the draft spec about extending a routing policy engine for automated regional failover, what is the proposed priority order for evaluating different failure signals when deciding whether to shift traffic or fail over?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_184be937d34a412ab5e61366d54d8ed6"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0007",
+      "question": "In a rolling investigation of a model regression on policy-related prompts after a recent deploy, what was the average triage rubric score change between the older baseline build and the newer optimized build in the first comparison run?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_72ec4a9962ba43e88acd61abbba1052d"
+      ],
+      "ranks": {
+        "BM25": 6,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 3
+      }
+    },
+    {
+      "question_id": "qst_0008",
+      "question": "In the internal shiproom runner notes, what is the target time-to-recover threshold for a verified rollback in staging?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_5fc2dba9f6ac4af2b49b4f546a4298d0"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 62,
+        "Hybrid (RRF)": 2
+      }
+    },
+    {
+      "question_id": "qst_0039",
+      "question": "In the 3-hour customer workshop plan for taking a team from initial evaluation to a proof of concept, what are the three types of go/no-go acceptance gates?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_f0567bbb5dbd4a52aef951e11ec13f2b"
+      ],
+      "ranks": {
+        "BM25": 2,
+        "Semantic (BGE-M3)": 12,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0047",
+      "question": "In some lab notes about reducing few-shot example copying, what tradeoff was noted when rotating the order of exemplars in prompts?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_7a2cfe4b7e574e6995f33e64bbdbf426"
+      ],
+      "ranks": {
+        "BM25": 3,
+        "Semantic (BGE-M3)": 2,
+        "Hybrid (RRF)": 2
+      }
+    },
+    {
+      "question_id": "qst_0050",
+      "question": "What is the proposed HTTP header scheme for attributing API traffic to quickstart templates, including how the header value is formatted and the opt-in header?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_089917448e654911bd186650ed12feb9"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0054",
+      "question": "What was the decision for when and how to roll out the new lattice scheduler into a limited canary, and what condition would allow expanding it to higher traffic models?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_cfc80f61d84848c58d961b49d1b3a774"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 42,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0057",
+      "question": "In our staging cluster, checkpoint downloads sometimes hang when resuming with an HTTP Range request to a cloud storage signed URL; what unexpected HTTP status code is sometimes returned instead of partial content that triggers the stall?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_4e89403dcf74496c8a8516bfd64e351f"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0062",
+      "question": "What is the proposed backend API endpoint and query parameters for fetching a trace in either grouped or full detail for the console timeline view?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_702bc520c52040428799fed41c63c8ca"
+      ],
+      "ranks": {
+        "BM25": 3,
+        "Semantic (BGE-M3)": 2,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0069",
+      "question": "In an ops day log about GPU rebalancing and brief west region network instability, what was the target slot capacity for the small hosted pool in the slot metrics dashboard?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_6d38a7bff5c84270adff95742a3eebce"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 3
+      }
+    },
+    {
+      "question_id": "qst_0079",
+      "question": "In a morning account blitz note from May 2026, what was the proposed mitigation to address repeated inference timeouts for a healthcare customer with a mid-June renewal?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_9776bd75ffbb4ca7b10669be1512daa3"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0085",
+      "question": "What are the three request quality and cost tiers proposed in the lightweight interaction tiering model for user facing features?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_2271ae6c393d409093b11b5a6d5b96ed"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0091",
+      "question": "In the key rotation runbook, what is the recommended default rotation interval for per-tenant key encryption keys used to wrap data keys?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_9eda2ec9cbda4188936246d888df1d0b"
+      ],
+      "ranks": {
+        "BM25": 2,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0094",
+      "question": "What is the recommended emergency action to temporarily simplify routing policy rules when the edge route agent is causing high evaluation latency and end to end latency spikes?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_bec90d2205534ca9a016f244e13884e5"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0105",
+      "question": "What are the proposed internal time to mitigate targets by severity for incident response, regardless of customer deployment tier?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_c83811391709468fa9534e6495c205e3"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0112",
+      "question": "In the proposed small business token pricing tiers, what is the monthly included token allowance for the plan priced at $25 per month?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_d85fcb5f989b44f8a51723a07be79e45"
+      ],
+      "ranks": {
+        "BM25": 18,
+        "Semantic (BGE-M3)": 29,
+        "Hybrid (RRF)": 8
+      }
+    },
+    {
+      "question_id": "qst_0116",
+      "question": "In the SOC2 readiness notes, what log retention duration is mentioned as a risk for some environments?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_48b40afb54b84af28b13cebf017c0616"
+      ],
+      "ranks": {
+        "BM25": 10,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0122",
+      "question": "Which GPU cluster or pool was flagged as having relatively low average usage but high churn, making its free capacity unreliable during a specific morning UTC window?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_89e9c8a4822b471a8e132d6c2b188b80"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 6,
+        "Hybrid (RRF)": 7
+      }
+    },
+    {
+      "question_id": "qst_0133",
+      "question": "What are the pass fail criteria used in the quick pull request smoke checks for the embedding robustness noise and input length evaluation suite?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_ae7131f5d64f4f37af677f702dc60d2b"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0134",
+      "question": "What was the suspected root cause behind the brief p99 latency spikes on the hosted chat inference route during small burst traffic?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_b9542668ae9b4163a932e4d16d26cd42"
+      ],
+      "ranks": {
+        "BM25": 3,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0141",
+      "question": "What was the target goal for average router queue time for very short token sequences, compared to the baseline of 28 ms, in the weekly sprint anchor about reducing staging inference queuing latency?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_acc33ff059404020b0ff26e19ad2b107"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0155",
+      "question": "What are the lifecycle states and key transitions for the edge adapter service that registers with a control plane and can fall back to hosted inference?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_cb89198715bc4be5b363a0d052f9407b"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 7,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0164",
+      "question": "In the HyperOnboard 30-60-90 onboarding template, what are the escalation conditions that should trigger an email to people ops and the hiring manager?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_5c05d2a74c484906852925d1cf1daa70"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0169",
+      "question": "Who is responsible for signing off on latency regression in the weekly customer rollout tracker for Nimbus Health?",
+      "question_type": "basic",
+      "expected_doc_ids": [
+        "dsid_acaf490041914b5bb3c275eaf13c3501"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0186",
+      "question": "In the notes about keeping long, stop-and-go chat sessions cheap without replaying the whole history, what storage setup and time-to-live were proposed for keeping the compact per-session state for recent sessions versus longer retention?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_0ae9b752fef446ec86e376e2dea49c28"
+      ],
+      "ranks": {
+        "BM25": 10,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 23
+      }
+    },
+    {
+      "question_id": "qst_0195",
+      "question": "From the internal sandbox microbench in the EU West lab around May 2029, what was the estimated dollars per one million tokens for the biggest model on a single 40GB GPU when using the no-batching low-latency mode on the long output workload (about 300 tokens per response)?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_de82a5f7140142f89781f2bf2d56cdca"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 6,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0196",
+      "question": "In the quick A100 microbenchmark notes comparing 4-bit weight compression to half precision on a 7B model at single-item batching, what speedup and quality hit were observed for the simplest run?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_3413f1905a0740d88b66c196b54f4df5"
+      ],
+      "ranks": {
+        "BM25": 46,
+        "Semantic (BGE-M3)": 2,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0199",
+      "question": "After a recent refactor to request grouping and the per request memoization layer, what is the specific risk if the cache key canonicalization now treats a trailing slash differently between callers, especially in a multi customer environment?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_88f1c9800dd54a75bad05653b7f07a93"
+      ],
+      "ranks": {
+        "BM25": 3,
+        "Semantic (BGE-M3)": 42,
+        "Hybrid (RRF)": 3
+      }
+    },
+    {
+      "question_id": "qst_0200",
+      "question": "For the hospital system that wants to run an interactive intake chatbot and auto-generate discharge writeups entirely inside its own locked-down data center with no patient data leaving the network, what end-to-end response time target did they set for producing about 200 tokens under peak load?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_eab7ef95052c4016aff7a3df422131f0"
+      ],
+      "ranks": {
+        "BM25": 2,
+        "Semantic (BGE-M3)": 35,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0212",
+      "question": "How should we set up low-noise oncall dashboards and tiered paging for a streaming text generation service so that responders can jump from a latency spike to a trace with hashed prompt references and cache hotness context and resolve issues within about 15 minutes?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_5085c9f4b4484f298dabd02c99d9ce03"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 4
+      }
+    },
+    {
+      "question_id": "qst_0225",
+      "question": "Before an external audit rehearsal happening in about three weeks, what are the due dates and owners for the main evidence gaps around deployment rollback proof, contractor access end date confirmation, encryption key rotation documentation placement, and two overdue third party security questionnaires?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_d295b7207fec4a6fb656f3e2a565d4e6"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0233",
+      "question": "What is the target success criteria for the internal two week cross team rehearsal that practices incident response for model endpoint reliability, especially the time limit from alert to starting the incident call?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_426b86ef54164d9f8d7972acc3e2fefa"
+      ],
+      "ranks": {
+        "BM25": 8,
+        "Semantic (BGE-M3)": 33,
+        "Hybrid (RRF)": 3
+      }
+    },
+    {
+      "question_id": "qst_0238",
+      "question": "How should I structure a small prompt experiment to reduce overconfident mistakes by mixing a couple of correct examples with one intentionally wrong example plus an immediate fix, while keeping the total examples very short and tracking things like made-up details and format compliance over a few hundred test prompts?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_e528bed025b44f71bc37a54f5a9aefcd"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 9,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0280",
+      "question": "In the rollout plan for the internal service that only hands out application secrets to verified runtime hosts using short lived machine health proofs and hardware backed key unwrapping, what is the default hot and cold retention period for the tamper resistant audit trail?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_6713194be8d54a0f8de8f8d89347ecf6"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 8
+      }
+    },
+    {
+      "question_id": "qst_0283",
+      "question": "In our long conversation serving experiments, what mitigation is suggested for the tendency to start making up references right after a retrieval step when older context has been aggressively shrunk to save memory?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_c9435a0a83724528bfd39f530d0c972a"
+      ],
+      "ranks": {
+        "BM25": 48,
+        "Semantic (BGE-M3)": 9,
+        "Hybrid (RRF)": 6
+      }
+    },
+    {
+      "question_id": "qst_0291",
+      "question": "For the shipping customer rollout checklist, what is the requirement for output stability across repeated cold and warm starts before approving deployment?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_38ddce87e36046df9749d9883dbfeeda"
+      ],
+      "ranks": {
+        "BM25": 34,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 62
+      }
+    },
+    {
+      "question_id": "qst_0297",
+      "question": "For the tiny production experiment that tweaks how the model serving layer keeps and evicts attention memory, what are the concrete pass or fail thresholds for error rate and tail latency during the first hour?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_02a6857f487642dca0732a4ac480ea5f"
+      ],
+      "ranks": {
+        "BM25": null,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": null
+      }
+    },
+    {
+      "question_id": "qst_0300",
+      "question": "In the internal routing performance memo that compared a nearby low latency serving path versus a centralized high throughput batching path and a split strategy that starts local then hands off when the response gets longer, which approach had the cheapest cost per 1k tokens for medium length requests and what was that cost?",
+      "question_type": "semantic",
+      "expected_doc_ids": [
+        "dsid_2ffb84ee56464340885a9e484cfc6f5d"
+      ],
+      "ranks": {
+        "BM25": 2,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 7
+      }
+    },
+    {
+      "question_id": "qst_0391",
+      "question": "In the hosted API incident in late April 2026 where streaming requests started returning 502/504 and non-streaming requests also saw a sharp tail-latency increase, what was the underlying trigger (involving an edge keepalive/connection-TTL change) and what immediate mitigations were used to restore service?",
+      "question_type": "constrained",
+      "expected_doc_ids": [
+        "dsid_0b0595a6d39247ada6238d8311b587f8"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0452",
+      "question": "Who owns the messy go-to-market misc assets dump with placeholder marketing files and micro-copy ideas created during a last-minute scramble before a partner call?",
+      "question_type": "miscellaneous",
+      "expected_doc_ids": [
+        "dsid_6279854275e44cce9115af8286fdf38b"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0453",
+      "question": "Who is responsible for the stock canyon hero placeholder image that is suggested for demo slides, and what is its current status?",
+      "question_type": "miscellaneous",
+      "expected_doc_ids": [
+        "dsid_a8a5eac6e7a243319426769963506277"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": 1,
+        "Hybrid (RRF)": 1
+      }
+    },
+    {
+      "question_id": "qst_0461",
+      "question": "What is the proposed weekly cleanup schedule and routine for tidying the engineering kitchen fridge so old opened items get discarded?",
+      "question_type": "miscellaneous",
+      "expected_doc_ids": [
+        "dsid_22b0987227cd4fdb94d67e5a62bbde40"
+      ],
+      "ranks": {
+        "BM25": 1,
+        "Semantic (BGE-M3)": null,
+        "Hybrid (RRF)": 5
+      }
+    }
+  ]
+}
