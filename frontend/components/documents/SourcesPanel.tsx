@@ -9,9 +9,11 @@ interface Props {
 
 export default function SourcesPanel({ message, selectedIndex, onSelect, onClose }: Props) {
   return (
-    <aside
+      <aside
       aria-label="Sources"
-      className="hidden h-screen w-80 shrink-0 flex-col gap-5 overflow-y-auto border-l border-gray-200 bg-white p-5 lg:flex"
+      className={`fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-5 overflow-y-auto border-l border-gray-200 bg-white p-5 transition-transform duration-200 lg:static lg:z-auto lg:w-80 lg:max-w-none lg:shrink-0 lg:translate-x-0 ${
+        message ? "translate-x-0" : "translate-x-full"
+      }`}
     >
       <div className="flex items-center justify-between">
         <h2 className="text-[15px] font-semibold text-gray-900">Sources for this answer</h2>
