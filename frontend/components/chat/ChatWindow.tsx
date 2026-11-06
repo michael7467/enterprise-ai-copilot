@@ -56,16 +56,15 @@ export default function ChatWindow({ userRole, onFirstMessage, onSelectSource }:
     setAttachment(null);
     setLoading(true);
     try {
+
       const res = await sendChat({
         message: text,
-        history: messages,
+        history: messages.map((m) => ({ role: m.role, content: m.content })),
         user_role: userRole,
         file_id: fileId,
       });
-      setMessages((m) => [
-        ...m,
-                { role: "assistant", content: res.answer, route: res.route, reason: res.reason, citations: res.citations },
-      ]);
+      setMessages((m) => [...m, { role: "assistant", ...res, content: res.answer }]);
+
     } catch (e) {
       setMessages((m) => [...m, { role: "assistant", content: `Error: ${(e as Error).message}` }]);
     } finally {
@@ -95,7 +94,7 @@ export default function ChatWindow({ userRole, onFirstMessage, onSelectSource }:
             }}
           />
         ))}
-        {loading && <div className="text-sm text-gray-600">Thinking…</div>}
+        {loading && <div className="text-sm text-gray-600">Thinking… on a laptop CPU this takes about a minute.</div>}
       </div>
 
       {(attachment || uploading || uploadError) && (

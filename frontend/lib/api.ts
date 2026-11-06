@@ -3,6 +3,16 @@ import type { ChatRequest, ChatResponse, UploadedFile } from "./types";
 const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK !== "false";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
+// Shows the backend's message (e.g. "Is Elasticsearch running?") instead of only a status code.
+async function errorText(res: Response, fallback: string): Promise<string> {
+  try {
+    const body = await res.json();
+    return typeof body.detail === "string" ? body.detail : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 // ---------- Chat ----------
 
 export async function sendChat(req: ChatRequest): Promise<ChatResponse> {
@@ -12,7 +22,7 @@ export async function sendChat(req: ChatRequest): Promise<ChatResponse> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(req),
   });
-  if (!res.ok) throw new Error(`API error ${res.status}`);
+  if (!res.ok) throw new Error(await errorText(res, `API error ${res.status}`));
   return res.json();
 }
 
@@ -23,11 +33,11 @@ export async function uploadFile(file: File): Promise<UploadedFile> {
   const form = new FormData();
   form.append("file", file);
   const res = await fetch(`${API_URL}/upload`, { method: "POST", body: form });
-  if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+  if (!res.ok) throw new Error(await errorText(res, `Upload failed (${res.status})`));
   return res.json();
 }
 
-// ---------- Mocks (remove once the backend is ready) ----------
+// ---------- Mocks (used when NEXT_PUBLIC_USE_MOCK is not "false") ----------
 
 const mockFiles = new Map<string, UploadedFile>();
 
@@ -57,22 +67,23 @@ async function mockChat(req: ChatRequest): Promise<ChatResponse> {
   }
   if (file) {
     return {
-      answer: `[uploaded_file] Mock answer from ${file.filename} to: "${req.message}"`,
+      answer: `[uploaded_file] Mock answer from ${file.filename} to: "${req.message}" [1]`,
       route: "uploaded_file",
-      reason: "A document is attached and the question refers to it.",
+      reason: "A document is attached.",
       citations: [
-        { source: file.filename, page: 4, snippet: "[Executive summary text will appear here]" },
-        { source: file.filename, page: 17, snippet: "[Revenue table text will appear here]" },
+        { source: file.filename, page: 4, index: 1, cited: true, snippet: "[Executive summary text]" },
+        { source: file.filename, page: 17, index: 2, cited: false, snippet: "[Revenue table text]" },
       ],
     };
   }
   if (/policy|our|leave|company/i.test(req.message)) {
     return {
-      answer: `[knowledge_base] Mock answer to: "${req.message}" (role: ${req.user_role})`,
+      answer: `[knowledge_base] Mock answer to: "${req.message}" (role: ${req.user_role}) [1]`,
       route: "knowledge_base",
       reason: "The question mentions company-specific terms.",
+      confidence: "low",
       citations: [
-        { source: "HR_Handbook.pdf", page: 12, snippet: "[Leave policy section will appear here]" },
+        { source: "HR_Handbook.pdf", page: 12, index: 1, cited: true, snippet: "[Leave policy section]" },
       ],
     };
   }
