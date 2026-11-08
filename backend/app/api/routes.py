@@ -91,6 +91,7 @@ def chat(req: ChatRequest) -> ChatResponse:
         **record,
         "status": "ok",
         "latency_ms": response.latency_ms,
+        "timings_ms": response.timings_ms,
         "confidence": response.confidence,
         "retrieval_score": response.retrieval_score,
         "sources": [c.source for c in response.citations],

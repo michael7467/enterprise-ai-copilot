@@ -1,4 +1,3 @@
-"""Request and response shapes. They match frontend/lib/types.ts."""
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -41,6 +40,7 @@ class ChatResponse(BaseModel):
     confidence: Literal["high", "low", "abstained"] | None = None  # None when the gate is off
     retrieval_score: float | None = None                            # top reranker score, if reranking is on
     latency_ms: int | None = None
+    timings_ms: dict[str, int] | None = None   # where the time went (observability)
 
 
 class UploadedFile(BaseModel):

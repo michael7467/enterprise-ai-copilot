@@ -1,6 +1,8 @@
 
 import json
+
 import re
+import threading
 import urllib.error
 import urllib.request
 
@@ -30,7 +32,23 @@ class LLMError(RuntimeError):
     pass
 
 
+_local = threading.local()   # timing stats of the latest call, per request thread
+
+
+def last_call_stats() -> dict:
+    """Ollama's timing breakdown for the latest chat() call in this thread (empty if unknown)."""
+    return dict(getattr(_local, "stats", {}))
+
+
+def _stats(data: dict) -> dict:
+    def ms(key: str) -> int:
+        return round(data.get(key, 0) / 1_000_000)   # Ollama reports nanoseconds
+    return {"llm_load_ms": ms("load_duration"), "llm_prompt_ms": ms("prompt_eval_duration"),
+            "llm_generate_ms": ms("eval_duration"), "prompt_tokens": data.get("prompt_eval_count", 0),
+            "output_tokens": data.get("eval_count", 0)}
+
 def chat(system: str, user: str, history: list[dict] | None = None) -> str:
+    _local.stats = {}
     messages = [{"role": "system", "content": system}, *(history or []), {"role": "user", "content": user}]
     body = {
         "model": settings.llm_model,
@@ -56,7 +74,9 @@ def _post(body: dict) -> str:
     req = urllib.request.Request(f"{settings.ollama_url}/api/chat", data=json.dumps(body).encode("utf-8"),
                                  headers={"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=settings.llm_timeout_s) as resp:
-        content = json.loads(resp.read().decode("utf-8"))["message"]["content"]
+        data = json.loads(resp.read().decode("utf-8"))
+    _local.stats = _stats(data)
+    content = data["message"]["content"]
     content = re.sub(r"<think>.*?</think>", "", content, flags=re.S)
     if "</think>" in content:  # thinking models may omit the opening tag
         content = content.split("</think>")[-1]
