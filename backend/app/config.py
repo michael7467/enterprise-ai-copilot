@@ -39,6 +39,7 @@ class Settings(BaseSettings):
     # Uploads
     upload_dir: Path = PROJECT_ROOT / "data" / "uploads"
     max_upload_mb: int = 20
+    request_log: Path = PROJECT_ROOT / "logs" / "requests.jsonl"
 
     # Frontend origins allowed to call the API
     cors_origins: list[str] = ["http://localhost:3000", "http://localhost:3001"]
