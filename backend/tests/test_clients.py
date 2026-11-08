@@ -74,6 +74,7 @@ def make_retriever(monkeypatch, rerank: bool):
     r.__dict__["reranker"] = FakeReranker()
     monkeypatch.setattr(r, "embed", lambda q: [0.0] * 4)
     monkeypatch.setattr(settings, "rerank_enabled", rerank)
+    monkeypatch.setattr(settings, "semantic_enabled", True)  
     return r
 
 
