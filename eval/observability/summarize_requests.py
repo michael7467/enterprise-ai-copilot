@@ -1,4 +1,9 @@
+"""Summarise the live request log (logs/requests.jsonl) written by the backend.
 
+Usage, from the project root:
+    python eval/observability/summarize_requests.py
+    python eval/observability/summarize_requests.py --since 2026-11-08
+"""
 import argparse
 import json
 import statistics
@@ -62,6 +67,25 @@ def main() -> None:
     for route, ms in sorted(by_route.items()):
         print(f"{route:<16}{len(ms):>4}{seconds(statistics.median(ms)):>10}"
               f"{seconds(percentile(ms, 95)):>10}{seconds(max(ms)):>10}")
+
+    # Where the time goes (requests logged with a timing breakdown)
+    timed = [r["timings_ms"] for r in ok if r.get("timings_ms") and "llm_prompt_ms" in r["timings_ms"]]
+    if timed:
+        steps = [("search_ms", "Search"), ("llm_load_ms", "Loading the model"),
+                 ("llm_prompt_ms", "Reading the prompt"), ("llm_generate_ms", "Writing the answer")]
+        medians = {key: statistics.median(t.get(key, 0) for t in timed) for key, _ in steps}
+        total = sum(medians.values()) or 1
+        cold = sum(1 for t in timed if t.get("llm_load_ms", 0) > 1000)
+        print(f"\nWhere the time goes (median of {len(timed)} timed answers; {cold} needed to load the model)")
+        for key, label in steps:
+            print(f"  {label:<22}{seconds(medians[key]):>9}{medians[key] / total:>6.0%}")
+
+        def rate(tokens: str, ms: str) -> float:
+            pairs = [(t.get(tokens, 0), t.get(ms, 0)) for t in timed if t.get(ms)]
+            return sum(n for n, _ in pairs) / (sum(m for _, m in pairs) / 1000) if pairs else 0
+        print(f"  Speed: reads {rate('prompt_tokens', 'llm_prompt_ms'):.0f} tokens/s, "
+              f"writes {rate('output_tokens', 'llm_generate_ms'):.1f} tokens/s; "
+              f"median prompt {statistics.median(t.get('prompt_tokens', 0) for t in timed):.0f} tokens")
 
     # Answer behaviour
     answered = [r for r in ok if r.get("route") in ("knowledge_base", "uploaded_file")]
