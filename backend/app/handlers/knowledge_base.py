@@ -1,4 +1,3 @@
-"""Company knowledge base: retrieve -> confidence gate -> grounded answer with citations."""
 import logging
 
 from app.config import settings

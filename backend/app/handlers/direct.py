@@ -1,4 +1,3 @@
-"""General questions: the language model answers on its own, with the recent conversation as context."""
 from app.generation import llm
 from app.schemas import ChatRequest, ChatResponse, RouteDecision
 

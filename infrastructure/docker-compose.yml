@@ -1,0 +1,16 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5
+    container_name: janoai-es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false   # local development only, never on a server
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g     # cap Elasticsearch's memory at 1 GB
+    ports:
+      - "127.0.0.1:9200:9200"          # reachable only from this laptop
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    mem_limit: 2g
+
+volumes:
+  esdata:

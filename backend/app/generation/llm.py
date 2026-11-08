@@ -1,4 +1,4 @@
-"""Answer generation with a local model through Ollama. Prompt v2 from eval/generation/generate_answers.py."""
+
 import json
 import re
 import urllib.error

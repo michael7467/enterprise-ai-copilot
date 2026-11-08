@@ -1,4 +1,3 @@
-"""Questions about an uploaded document: answer from its own pages, citing page numbers."""
 import re
 
 from app.config import settings
