@@ -84,7 +84,7 @@ export default function SourcesPanel({ message, selectedIndex, onSelect, onClose
             <span>Route</span>
             <span className="font-semibold">{message.route}</span>
             <span>Router</span>
-            <span>mock</span>
+            <span>rule-based</span>
           </div>
           {message.reason && <p className="leading-relaxed text-gray-600">{message.reason}</p>}
         </div>

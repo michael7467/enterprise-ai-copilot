@@ -101,7 +101,7 @@ export default function Sidebar({
             <option key={r.value} value={r.value}>{r.label}</option>
           ))}
         </select>
-        <p className="text-xs text-gray-600">Changes which documents can be searched.</p>
+        <p className="text-xs text-gray-600">Preview: role-based access is not active yet.</p>
       </div>
     </nav>
   );

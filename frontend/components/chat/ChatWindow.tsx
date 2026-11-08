@@ -144,7 +144,7 @@ export default function ChatWindow({ userRole, onFirstMessage, onSelectSource }:
         </button>
       </div>
       <p className="pt-2 text-center text-xs text-gray-600">
-        Answers cite their sources. Only documents your role can access are searched.
+        Answers cite their sources. Runs on a local model, so answers can contain mistakes.
       </p>
     </div>
   );
