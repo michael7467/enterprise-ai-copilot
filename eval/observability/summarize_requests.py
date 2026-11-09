@@ -1,9 +1,4 @@
-"""Summarise the live request log (logs/requests.jsonl) written by the backend.
 
-Usage, from the project root:
-    python eval/observability/summarize_requests.py
-    python eval/observability/summarize_requests.py --since 2026-11-08
-"""
 import argparse
 import json
 import statistics
@@ -73,12 +68,16 @@ def main() -> None:
     if timed:
         steps = [("search_ms", "Search"), ("llm_load_ms", "Loading the model"),
                  ("llm_prompt_ms", "Reading the prompt"), ("llm_generate_ms", "Writing the answer")]
-        medians = {key: statistics.median(t.get(key, 0) for t in timed) for key, _ in steps}
-        total = sum(medians.values()) or 1
+        totals = [sum(t.get(key, 0) for key, _ in steps) for t in timed]
+        grand_total = sum(totals) or 1
         cold = sum(1 for t in timed if t.get("llm_load_ms", 0) > 1000)
-        print(f"\nWhere the time goes (median of {len(timed)} timed answers; {cold} needed to load the model)")
+        print(f"\nWhere the time goes ({len(timed)} timed answers; {cold} needed to load the model)")
+        print(f"  {'Step':<22}{'median':>9}{'share':>7}")
         for key, label in steps:
-            print(f"  {label:<22}{seconds(medians[key]):>9}{medians[key] / total:>6.0%}")
+            share = sum(t.get(key, 0) for t in timed) / grand_total   # share of all time spent, not of medians
+            print(f"  {label:<22}{seconds(statistics.median(t.get(key, 0) for t in timed)):>9}{share:>7.0%}")
+        print(f"  {'Total':<22}{seconds(statistics.median(totals)):>9}{'100%':>7}")
+        print("  (Medians of the steps do not add up to the median total: each can come from a different answer.)")
 
         def rate(tokens: str, ms: str) -> float:
             pairs = [(t.get(tokens, 0), t.get(ms, 0)) for t in timed if t.get(ms)]

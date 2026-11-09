@@ -21,6 +21,7 @@ On 5,000 Drive documents from [EnterpriseRAG-Bench](https://huggingface.co/datas
 | Cross-encoder reranking of the top 10 | **recall@1 62% → 83%**, MRR 0.70 → 0.88, at 1/5 the cost of reranking 50 |
 | Local Qwen3 8B, citing the right document | **97%** of answers when it was retrieved |
 | Unanswerable questions: correct abstentions | **19% → 57%** with a stricter prompt + calibrated score gate, keeping 95% of answerable questions |
+| Live latency on a laptop CPU | **76%** of answer time is the model *reading* the prompt; 3 chunks instead of 4 cut the prompt by 18% with no retrieval loss |
 
 ## Architecture
 
@@ -113,6 +114,40 @@ wrong document* (for example, quoting another experiment's thresholds). A faithf
 these answers highly; being faithful to the sources is not the same as being correct. Prompting alone
 barely helps a small model; the retrieval-confidence gate does most of the work.
 
+### Observability: where the time goes in the live app
+
+Every chat request is logged as one JSON line in `logs/requests.jsonl` (kept out of git): route, model,
+latency split into search / model loading / prompt reading / generation, prompt and output tokens,
+sources, cited sources, abstention, and errors. `python eval/observability/summarize_requests.py`
+turns the log into a report.
+
+Laptop demo (Qwen3 4B Instruct on CPU, light mode, 4 chunks), 3 answers:
+
+| Step | Median | Share of time |
+|---|---|---|
+| Search (BM25) | 1.7 s | 2% |
+| Loading the model | 0 s (stays loaded 15 min) | 0% |
+| **Reading the prompt** (~1,400 tokens at 27 tokens/s) | **53.6 s** | **76%** |
+| Writing the answer (~80 tokens at 4.4 tokens/s) | 15.6 s | 22% |
+
+On CPU the bottleneck is neither retrieval nor generation but **prompt processing**, so the context size
+is the main lever. The log also caught real failures: out-of-memory errors when other programs held the
+RAM, and confident, cited answers from the *wrong* document when a vague question gave keyword search
+nothing specific to match.
+
+### Context size: 3 chunks instead of 4
+
+[`eval/retrieval/context_size.py`](eval/retrieval/context_size.py): share of the 42 questions where an
+expected document is among the first *k* chunks sent to the model.
+
+| Chunks sent | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| BM25 (light mode) | 60% | 69% | **79%** | **79%** | 79% | 81% |
+| Hybrid (RRF) | 62% | 67% | **76%** | **76%** | 81% | 81% |
+
+Dropping the 4th chunk loses **no question** and shortens the prompt by **18%** (1,435 → 1,182 tokens),
+so the laptop setup uses `TOP_K=3`. With 42 questions this means "no measurable loss", not a guarantee.
+
 ## Running it
 
 **Requirements:** Python 3.11+, Node.js 20+, Docker Desktop, [Ollama](https://ollama.com). About 8 GB of
@@ -146,6 +181,24 @@ python benchmarks/enterprise_rag/embed_chunks.py     # ~15 min on a free Colab T
 python benchmarks/enterprise_rag/index_chunks.py
 ```
 
+### Running on a 16 GB laptop (no GPU)
+
+What worked on a 13.8 GB Windows laptop, in `backend/.env`:
+
+```
+LLM_MODEL=qwen3:4b-instruct-2507-q4_K_M
+LLM_NUM_CTX=4096
+SEMANTIC_ENABLED=false
+TOP_K=3
+```
+
+- The first question loads the model and needs **about 3.5 GB of free RAM**. Below that, Ollama fails with
+  `failed to allocate buffer` (the app reports it as "model does not fit in memory").
+- **Close VS Code and spare Chrome tabs during demos**: with them open (5.6 GB together), prompt reading
+  slowed from 27 to 12–16 tokens/s, and the model sometimes did not load at all.
+- Cap Docker's memory in `%UserProfile%\.wslconfig` (`[wsl2]` → `memory=3GB`).
+- Check free memory with `(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB` (in GB).
+
 **Tests:** `cd backend && pip install -r requirements-test.txt && python -m pytest -q` (no models or
 services needed; Elasticsearch and Ollama are replaced by fakes). They also run in CI on every push.
 
@@ -157,6 +210,7 @@ services needed; Elasticsearch and Ollama are replaced by fakes). They also run 
 | `SEMANTIC_ENABLED` | `true` | `false` = light mode: BM25 only, embedding model never loaded |
 | `RERANK_ENABLED` | `false` | Cross-encoder reranking + confidence gate (use with a GPU) |
 | `GATE_THRESHOLD` / `LOW_CONFIDENCE` | `0.6` / `0.85` | Abstain below / flag "low confidence" below |
+| `TOP_K` | `4` | Chunks sent to the model; `3` on a laptop (see "Context size") |
 | `LLM_NUM_CTX` | `6144` | Model context window; lower it to save memory |
 
 ## Project structure
