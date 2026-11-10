@@ -1,0 +1,694 @@
+{
+  "run_at": "2026-11-09T23:12:35",
+  "generation_run": "qwen3_8b_v2",
+  "judge": "qwen3:4b-instruct-2507-q4_K_M",
+  "summary": {
+    "all judged answers": {
+      "answers": 42,
+      "mean_faithfulness": 0.9216269841269841,
+      "fully_faithful": 0.7857142857142857
+    },
+    "cites an expected document": {
+      "answers": 39,
+      "mean_faithfulness": 0.922008547008547,
+      "fully_faithful": 0.7948717948717948
+    },
+    "does NOT cite an expected document": {
+      "answers": 3,
+      "mean_faithfulness": 0.9166666666666666,
+      "fully_faithful": 0.6666666666666666
+    },
+    "skipped_abstentions": 0,
+    "judge_errors": 0
+  },
+  "per_answer": [
+    {
+      "question_id": "qst_0006",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed priority order for evaluating different failure signals is as follows:  \n1) Reachability DOWN (authoritative) => FAILOVER (unless no healthy fallback) [1].  \n2) Errors (5xx) fast burn (high severity) => FAILOVER or PARTIAL_SHIFT depending on blast radius and capacity [1].  \n3) Tail latency burn (p99/p95) => PARTIAL_SHIFT first; escalate to FAILOVER if corroborated and sustained [1].  \n4) Capacity exhaustion / hard gate => HOLD + load shed (controller action), avoid shifting into constrained region [1].  \n5) Control plane degradation => HOLD (do not flip rapidly; prevent oscillation) [1].",
+      "statements": [
+        "The proposed priority order for evaluating different failure signals is as follows:",
+        "Reachability DOWN (authoritative) => FAILOVER (unless no healthy fallback) [1].",
+        "Errors (5xx) fast burn (high severity) => FAILOVER or PARTIAL_SHIFT depending on blast radius and capacity [1].",
+        "Tail latency burn (p99/p95) => PARTIAL_SHIFT first; escalate to FAILOVER if corroborated and sustained [1].",
+        "Capacity exhaustion / hard gate => HOLD + load shed (controller action), avoid shifting into constrained region [1].",
+        "Control plane degradation => HOLD (do not flip rapidly; prevent oscillation) [1]."
+      ],
+      "verdicts": [
+        "partial",
+        "supported",
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 0.9166666666666666
+    },
+    {
+      "question_id": "qst_0007",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The average triage rubric score decreased from 2.7 in the older baseline build to 1.9 in the newer optimized build in the first comparison run [1].",
+      "statements": [
+        "The average triage rubric score decreased from 2.7 in the older baseline build to 1.9 in the newer optimized build in the first comparison run [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0008",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The target time-to-recover threshold for a verified rollback in staging is less than 10 minutes [1].",
+      "statements": [
+        "The target time-to-recover threshold for a verified rollback in staging is less than 10 minutes [1]."
+      ],
+      "verdicts": [
+        "partial"
+      ],
+      "faithfulness": 0.5
+    },
+    {
+      "question_id": "qst_0039",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The three types of go/no-go acceptance gates in the 3-hour customer workshop plan are:  \n1. Quality gate: model meets baseline precision/recall or user satisfaction target on representative dataset [2].  \n2. Performance gate: meets latency SLOs at target load with acceptable cost [2].  \n3. Compliance gate: data handling and encryption meet stated requirements [2].",
+      "statements": [
+        "The three types of go/no-go acceptance gates in the 3-hour customer workshop plan are:",
+        "Quality gate: model meets baseline precision/recall or user satisfaction target on representative dataset [2].",
+        "Performance gate: meets latency SLOs at target load with acceptable cost [2].",
+        "Compliance gate: data handling and encryption meet stated requirements [2]."
+      ],
+      "verdicts": [
+        "unsupported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 0.75
+    },
+    {
+      "question_id": "qst_0047",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "Rotating the order of exemplars in prompts was noted to interact badly with caching, requiring a route-aware cache bypass [1]. This tradeoff involves potential increased latency and complexity in maintaining cache efficiency while avoiding position bias [1].",
+      "statements": [
+        "Rotating the order of exemplars in prompts was noted to interact badly with caching, requiring a route-aware cache bypass [1].",
+        "This tradeoff involves potential increased latency and complexity in maintaining cache efficiency while avoiding position bias [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "partial"
+      ],
+      "faithfulness": 0.75
+    },
+    {
+      "question_id": "qst_0050",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed HTTP header scheme for attributing API traffic to quickstart templates includes two headers: \n\n- `X-Redwood-Template` with a value formatted as `<template_name>@<template_version>;<language>` [1].\n- `X-Redwood-Template-Opt-In` with a value of `true` or `false` [1].\n\nTelemetry tagging is opt-in and requires an environment variable to enable it [3].",
+      "statements": [
+        "The proposed HTTP header scheme for attributing API traffic to quickstart templates includes two headers:",
+        "`X-Redwood-Template` with a value formatted as `<template_name>@<template_version>;<language>` [1].",
+        "`X-Redwood-Template-Opt-In` with a value of `true` or `false` [1].",
+        "Telemetry tagging is opt-in and requires an environment variable to enable it [3]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0054",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The decision was to move the lattice scheduler into a restricted canary for low-traffic models next week (canary window Mon-Wed). If p95 improves and no errors occur, it will be expanded to medium tier [1]. The condition for expansion is that p95 latency improves and there are no errors during the canary period [1].",
+      "statements": [
+        "The decision was to move the lattice scheduler into a restricted canary for low-traffic models next week (canary window Mon-Wed).",
+        "If p95 improves and no errors occur, it will be expanded to medium tier [1].",
+        "The condition for expansion is that p95 latency improves and there are no errors during the canary period [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "unsupported",
+        "supported"
+      ],
+      "faithfulness": 0.6666666666666666
+    },
+    {
+      "question_id": "qst_0057",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The unexpected HTTP status code sometimes returned instead of partial content (206) is 200 OK [2]. This causes the client to treat it as a fallback to a full download, leading to confusion in Content-Length and eventual stall [3].",
+      "statements": [
+        "The unexpected HTTP status code sometimes returned instead of partial content (206) is 200 OK [2].",
+        "This causes the client to treat it as a fallback to a full download, leading to confusion in Content-Length and eventual stall [3]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0062",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed backend API endpoint is `/v1/traces/{id}` with query parameters `level=grouped|full` and `time_window=start,end` [2].",
+      "statements": [
+        "The proposed backend API endpoint is `/v1/traces/{id}` with query parameters `level=grouped|full` and `time_window=start,end` [2]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0069",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The target slot capacity for the small hosted pool in the slot metrics dashboard was 4200 slots [1].",
+      "statements": [
+        "The target slot capacity for the small hosted pool in the slot metrics dashboard was 4200 slots [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0079",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed mitigation to address repeated inference timeouts for Fortis Health, a healthcare customer with a mid-June renewal, was to propose a 10% reserved burst for their peak windows and enable KV prefix caching on the main inference route [1].",
+      "statements": [
+        "The proposed mitigation to address repeated inference timeouts for Fortis Health, a healthcare customer with a mid-June renewal, was to propose a 10% reserved burst for their peak windows and enable KV prefix caching on the main inference route [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0085",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The three request quality and cost tiers proposed in the lightweight interaction tiering model are micro, standard, and deep [1].",
+      "statements": [
+        "The three request quality and cost tiers proposed in the lightweight interaction tiering model are micro, standard, and deep [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0091",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The recommended default rotation interval for per-tenant key encryption keys (KEK) used to wrap data keys is 6–12 months [1].",
+      "statements": [
+        "The recommended default rotation interval for per-tenant key encryption keys (KEK) used to wrap data keys is 6–12 months [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0094",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The recommended emergency action is to enable emergency-compact policy set: POST /v1/admin/policies/compact {\"reason\":\"latency_immediate\"} to temporarily apply simplified ruleset [2].",
+      "statements": [
+        "The recommended emergency action is to enable emergency-compact policy set: POST /v1/admin/policies/compact {\"reason\":\"latency_immediate\"} to temporarily apply simplified ruleset [2]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0105",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed internal time-to-mitigate (TTM) targets by severity for incident response, regardless of customer deployment tier, are as follows:\n\n- Sev0: 30 minutes  \n- Sev1: 2 hours  \n- Sev2: 1 business day  \n- Sev3: 5 business days (or next planned release train) [1][2].",
+      "statements": [
+        "The proposed internal time-to-mitigate (TTM) targets by severity for incident response, regardless of customer deployment tier, are as follows:",
+        "Sev0: 30 minutes",
+        "Sev1: 2 hours",
+        "Sev2: 1 business day",
+        "Sev3: 5 business days (or next planned release train) [1][2]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0112",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The monthly included token allowance for the plan priced at $25 per month is 10M tokens [1].",
+      "statements": [
+        "The monthly included token allowance for the plan priced at $25 per month is 10M tokens [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0116",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The log retention duration mentioned as a risk for some environments is 90 days, as SOC2 reviewers might expect 12 months for certain records [1].",
+      "statements": [
+        "The log retention duration mentioned as a risk for some environments is 90 days, as SOC2 reviewers might expect 12 months for certain records [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0122",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The APAC-eu1-pool-A was flagged as having low average utilization (47%) but high entropy (0.72), indicating frequent slot churn due to ephemeral developer jobs, making its free capacity unreliable during the 9:00–13:00 UTC window [1].",
+      "statements": [
+        "The APAC-eu1-pool-A was flagged as having low average utilization (47%) but high entropy (0.72), indicating frequent slot churn due to ephemeral developer jobs, making its free capacity unreliable during the 9:00–13:00 UTC window [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0133",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The pass/fail criteria for quick pull request (smoke) checks include: median cosine NN distance within +/- 6% of baseline; NDCG@10 drop < 3% absolute on curated-qrels-5lang; and cluster purity drop < 5 percentage points [1].",
+      "statements": [
+        "The pass/fail criteria for quick pull request (smoke) checks include: median cosine NN distance within +/- 6% of baseline; NDCG@10 drop < 3% absolute on curated-qrels-5lang; and cluster purity drop < 5 percentage points [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0134",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The suspected root cause behind the brief p99 latency spikes on the hosted chat inference route during small burst traffic was a KV cache eviction storm, hypothesized to be caused by an eviction boundary bug where a single large request (long context) triggered a cascade that invalidated shards aggressively, leading to cache cold starts and extra decoding cost [2].",
+      "statements": [
+        "The suspected root cause behind the brief p99 latency spikes on the hosted chat inference route during small burst traffic was a KV cache eviction storm, hypothesized to be caused by an eviction boundary bug where a single large request (long context) triggered a cascade that invalidated shards aggressively, leading to cache cold starts and extra decoding cost [2]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0141",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The target goal for average router queue time for very short token sequences was to reduce it by 10–15% from the baseline of 28 ms, aiming for a target of approximately 25 ms [1].",
+      "statements": [
+        "The target goal for average router queue time for very short token sequences was to reduce it by 10–15% from the baseline of 28 ms, aiming for a target of approximately 25 ms [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0155",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The lifecycle states for the edge adapter service are INIT, REGISTERING, ACTIVE, DRAINING, DEGRADED, and RETIRED [1]. Key transitions include INIT -> REGISTERING -> ACTIVE, ACTIVE -> DRAINING (operator or rollout), DRAINING -> RETIRED, and any state -> DEGRADED on resource failure; DEGRADED -> ACTIVE after heal [1].",
+      "statements": [
+        "The lifecycle states for the edge adapter service are INIT, REGISTERING, ACTIVE, DRAINING, DEGRADED, and RETIRED [1].",
+        "Key transitions include INIT -> REGISTERING -> ACTIVE, ACTIVE -> DRAINING (operator or rollout), DRAINING -> RETIRED, and any state -> DEGRADED on resource failure; DEGRADED -> ACTIVE after heal [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0164",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The escalation conditions that should trigger an email to People Ops and the hiring manager are: not shipping a measurable artifact by day 30, ongoing access blockers >48h, and repeated missing meetings [1].",
+      "statements": [
+        "The escalation conditions that should trigger an email to People Ops and the hiring manager are: not shipping a measurable artifact by day 30, ongoing access blockers >48h, and repeated missing meetings [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0169",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "Maya Patel is responsible for latency regression signoff in the weekly customer rollout tracker for Nimbus Health [1].",
+      "statements": [
+        "Maya Patel is responsible for latency regression signoff in the weekly customer rollout tracker for Nimbus Health [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0186",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": false,
+      "answer": "The storage setup proposed for keeping compact per-session state involves using a KV-prefix cache that stores recent prefixes and decoder KV chunks keyed by (tenant, session_id) [2]. For time-to-live (TTL), the default retention was aggressive (30s) to limit memory pressure, but there was a proposal to increase per-session retention for high-value clients or routes to reduce repeated warmups during microburst sessions [2].",
+      "statements": [
+        "The storage setup proposed for keeping compact per-session state involves using a KV-prefix cache that stores recent prefixes and decoder KV chunks keyed by (tenant, session_id) [2].",
+        "For time-to-live (TTL), the default retention was aggressive (30s) to limit memory pressure, but there was a proposal to increase per-session retention for high-value clients or routes to reduce repeated warmups during microburst sessions [2]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0195",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The estimated dollars per one million tokens for the biggest model (rw-70b-fp16) on a single 40GB GPU (A100x1) in the no-batching low-latency mode for the long output workload (about 300 tokens per response) is approximately $1.90 per million tokens [1]. This figure is derived from the economic assumptions in the document, which use spot-equivalent cost for comparison purposes.",
+      "statements": [
+        "The estimated dollars per one million tokens for the biggest model (rw-70b-fp16) on a single 40GB GPU (A100x1) in the no-batching low-latency mode for the long output workload (about 300 tokens per response) is approximately $1.90 per million tokens [1].",
+        "This figure is derived from the economic assumptions in the document, which use spot-equivalent cost for comparison purposes."
+      ],
+      "verdicts": [
+        "unsupported",
+        "supported"
+      ],
+      "faithfulness": 0.5
+    },
+    {
+      "question_id": "qst_0196",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The NF4 PTQ on 7B model showed a ~1.8x token throughput improvement over fp16 at batch=1 on A100, with a ~+0.6 ppl loss for story prompts [1].",
+      "statements": [
+        "The NF4 PTQ on 7B model showed a ~1.8x token throughput improvement over fp16 at batch=1 on A100, with a ~+0.6 ppl loss for story prompts [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0199",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "If the cache key canonicalization now treats a trailing slash differently between callers, it could lead to cache poisoning or silent correctness issues in a multi-customer environment. This is because different handling of trailing slashes can result in different cache keys for the same logical request, preventing cache hits and potentially serving incorrect data [1]. Additionally, this could cause cache fragmentation and reduce prefix cache hit rates, especially when customers have slightly varying token boundaries [2]. The risk is exacerbated in a multi-tenant setup where isolation and consistent key handling are critical [3].",
+      "statements": [
+        "If the cache key canonicalization now treats a trailing slash differently between callers, it could lead to cache poisoning or silent correctness issues in a multi-customer environment.",
+        "This is because different handling of trailing slashes can result in different cache keys for the same logical request, preventing cache hits and potentially serving incorrect data [1].",
+        "Additionally, this could cause cache fragmentation and reduce prefix cache hit rates, especially when customers have slightly varying token boundaries [2].",
+        "The risk is exacerbated in a multi-tenant setup where isolation and consistent key handling are critical [3]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0200",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The hospital system set an end-to-end response time target of <= 18 seconds for producing about 200 tokens under peak load [1].",
+      "statements": [
+        "The hospital system set an end-to-end response time target of <= 18 seconds for producing about 200 tokens under peak load [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0212",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "To set up low-noise oncall dashboards and tiered paging for a streaming text generation service, focus on slice-first dashboards with high-value slices like customer_tier=enterprise, route=/chat/stream, and kv_cache_warmth={hot,warm,cold} [1]. Include metrics such as inference.request.count and 95th latency for quick visibility [2]. Ensure trace anchoring with a sampled trace linked to the alert's request-id/session-id, and include hashed prompt references in trace indexes for faster repro [4]. Tiered paging should involve #sre-oncall and pager duty SRE primary for customer-impacting issues, with minimal user-facing changes during containment [2].",
+      "statements": [
+        "To set up low-noise oncall dashboards and tiered paging for a streaming text generation service, focus on slice-first dashboards with high-value slices like customer_tier=enterprise, route=/chat/stream, and kv_cache_warmth={hot,warm,cold} [1].",
+        "Include metrics such as inference.request.count and 95th latency for quick visibility [2].",
+        "Ensure trace anchoring with a sampled trace linked to the alert's request-id/session-id, and include hashed prompt references in trace indexes for faster repro [4].",
+        "Tiered paging should involve #sre-oncall and pager duty SRE primary for customer-impacting issues, with minimal user-facing changes during containment [2]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "partial",
+        "supported"
+      ],
+      "faithfulness": 0.875
+    },
+    {
+      "question_id": "qst_0225",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "- Deployment rollback proof: Due 2026-02-28, Owner: Devon [1][2].\n- Contractor access end date confirmation: Due 2026-02-24, Owner: Maya [1][2].\n- Encryption key rotation documentation placement: Due 2026-02-21, Owner: Paulina [1][2].\n- Two overdue third-party security questionnaires: Due 2026-03-05, Owner: Alex [1].",
+      "statements": [
+        "Deployment rollback proof: Due 2026-02-28, Owner: Devon [1][2].",
+        "Contractor access end date confirmation: Due 2026-02-24, Owner: Maya [1][2].",
+        "Encryption key rotation documentation placement: Due 2026-02-21, Owner: Paulina [1][2].",
+        "Two overdue third-party security questionnaires: Due 2026-03-05, Owner: Alex [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0233",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The target success criteria for the two-week cross-team rehearsal include completing 3 tabletop-to-live escalation handoffs within 2 weeks [1]. The specific time limit from alert to starting the incident call is not explicitly mentioned in the sources.",
+      "statements": [
+        "The target success criteria for the two-week cross-team rehearsal include completing 3 tabletop-to-live escalation handoffs within 2 weeks [1].",
+        "The specific time limit from alert to starting the incident call is not explicitly mentioned in the sources."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0238",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "To structure a small prompt experiment for reducing overconfident mistakes, include a mix of 1–2 correct examples, 1 intentionally wrong example, and an immediate fix. Keep each exemplar short (3–5 tokens) to maintain brevity [2]. Track made-up details and format compliance by using failure probes and tagging outputs with short tags like \"hallucination\" or \"format-escape\" [1][4]. Ensure the experiment is reproducible with notes on prompt length and token budgets [2].",
+      "statements": [
+        "To structure a small prompt experiment for reducing overconfident mistakes, include a mix of 1–2 correct examples, 1 intentionally wrong example, and an immediate fix.",
+        "Keep each exemplar short (3–5 tokens) to maintain brevity [2].",
+        "Track made-up details and format compliance by using failure probes and tagging outputs with short tags like \"hallucination\" or \"format-escape\" [1][4].",
+        "Ensure the experiment is reproducible with notes on prompt length and token budgets [2]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0280",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The default hot retention period for the tamper-resistant audit trail is 90 days, and the cold retention period is 1 year [1][2].",
+      "statements": [
+        "The default hot retention period for the tamper-resistant audit trail is 90 days, and the cold retention period is 1 year [1][2]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0283",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "A practical mitigation suggested is calibrated retrieval scoring (confidence-aware masking), hallucination detectors that watch for sudden entropy drops, and short-term cache reset after retrieval events [1].",
+      "statements": [
+        "A practical mitigation suggested is calibrated retrieval scoring (confidence-aware masking), hallucination detectors that watch for sudden entropy drops, and short-term cache reset after retrieval events [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0291",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": false,
+      "answer": "The requirement for output stability across repeated cold and warm starts before approving deployment is to ensure that the model variant swap (A->A-q4 + fallback path) is tested with a warmup + spike to confirm that the quantized variant does not amplify latency due to smaller batch nuclei [1]. Additionally, the routing rule change (heuristic by latency/cost) must be verified with a cold start sweep to ensure fallback routing is honored under node churn [1].",
+      "statements": [
+        "The requirement for output stability across repeated cold and warm starts before approving deployment is to ensure that the model variant swap (A->A-q4 + fallback path) is tested with a warmup + spike to confirm that the quantized variant does not amplify latency due to smaller batch nuclei [1].",
+        "Additionally, the routing rule change (heuristic by latency/cost) must be verified with a cold start sweep to ensure fallback routing is honored under node churn [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0297",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": false,
+      "answer": "During the first hour, the error rate threshold is <0.2% absolute increase over baseline for 30 minutes [1]. For tail latency, the p95 increase must be <10% over baseline, and p99 <20% for a persistent 30-minute window [1].",
+      "statements": [
+        "During the first hour, the error rate threshold is <0.2% absolute increase over baseline for 30 minutes [1].",
+        "For tail latency, the p95 increase must be <10% over baseline, and p99 <20% for a persistent 30-minute window [1]."
+      ],
+      "verdicts": [
+        "partial",
+        "supported"
+      ],
+      "faithfulness": 0.75
+    },
+    {
+      "question_id": "qst_0300",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The hybrid-evict approach had the cheapest cost per 1k tokens for medium length requests, with a cost of $10.50 per 1M tokens [2].",
+      "statements": [
+        "The hybrid-evict approach had the cheapest cost per 1k tokens for medium length requests, with a cost of $10.50 per 1M tokens [2]."
+      ],
+      "verdicts": [
+        "unsupported"
+      ],
+      "faithfulness": 0.0
+    },
+    {
+      "question_id": "qst_0391",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The underlying trigger was an unintended change to a per-connection TTL/keepalive config combined with an edge buffer write-stall bug in the streaming proxy, causing head-of-line stalls and backlog amplification under normal traffic spikes [1]. The immediate mitigations included rollback and emergency config override to restore baseline behavior [2].",
+      "statements": [
+        "The underlying trigger was an unintended change to a per-connection TTL/keepalive config combined with an edge buffer write-stall bug in the streaming proxy, causing head-of-line stalls and backlog amplification under normal traffic spikes [1].",
+        "The immediate mitigations included rollback and emergency config override to restore baseline behavior [2]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0452",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The owner of the messy go-to-market misc assets dump with placeholder marketing files and micro-copy ideas created during a last-minute scramble before a partner call is Priya Nair [1]. She is noted as the go-to-market owner of this dump [1].",
+      "statements": [
+        "The owner of the messy go-to-market misc assets dump with placeholder marketing files and micro-copy ideas created during a last-minute scramble before a partner call is Priya Nair [1].",
+        "She is noted as the go-to-market owner of this dump [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0453",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The stock canyon hero placeholder image is owned by Priya Desai, and its current status is \"needs crop\" [1].",
+      "statements": [
+        "The stock canyon hero placeholder image is owned by Priya Desai, and its current status is \"needs crop\" [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0461",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed weekly cleanup schedule is a quick tidy on Fridays at 4pm, which involves wiping counters, checking the fridge, and tossing obvious trash [1]. Old opened items are to be discarded if they are more than 14 days old, based on the date labeled on the jar [1].",
+      "statements": [
+        "The proposed weekly cleanup schedule is a quick tidy on Fridays at 4pm, which involves wiping counters, checking the fridge, and tossing obvious trash [1].",
+        "Old opened items are to be discarded if they are more than 14 days old, based on the date labeled on the jar [1]."
+      ],
+      "verdicts": [
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 1.0
+    }
+  ]
+}

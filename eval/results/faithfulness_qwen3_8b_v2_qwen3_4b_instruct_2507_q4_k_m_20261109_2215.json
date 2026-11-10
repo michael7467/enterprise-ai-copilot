@@ -1,0 +1,73 @@
+{
+  "run_at": "2026-11-09T22:15:41",
+  "generation_run": "qwen3_8b_v2",
+  "judge": "qwen3:4b-instruct-2507-q4_K_M",
+  "summary": {
+    "all judged answers": {
+      "answers": 3,
+      "mean_faithfulness": 0.8055555555555556,
+      "fully_faithful": 0.3333333333333333
+    },
+    "cites an expected document": {
+      "answers": 3,
+      "mean_faithfulness": 0.8055555555555556,
+      "fully_faithful": 0.3333333333333333
+    },
+    "skipped_abstentions": 0,
+    "judge_errors": 0
+  },
+  "per_answer": [
+    {
+      "question_id": "qst_0006",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The proposed priority order for evaluating different failure signals is as follows:  \n1) Reachability DOWN (authoritative) => FAILOVER (unless no healthy fallback) [1].  \n2) Errors (5xx) fast burn (high severity) => FAILOVER or PARTIAL_SHIFT depending on blast radius and capacity [1].  \n3) Tail latency burn (p99/p95) => PARTIAL_SHIFT first; escalate to FAILOVER if corroborated and sustained [1].  \n4) Capacity exhaustion / hard gate => HOLD + load shed (controller action), avoid shifting into constrained region [1].  \n5) Control plane degradation => HOLD (do not flip rapidly; prevent oscillation) [1].",
+      "statements": [
+        "The proposed priority order for evaluating different failure signals is as follows:",
+        "Reachability DOWN (authoritative) => FAILOVER (unless no healthy fallback) [1].",
+        "Errors (5xx) fast burn (high severity) => FAILOVER or PARTIAL_SHIFT depending on blast radius and capacity [1].",
+        "Tail latency burn (p99/p95) => PARTIAL_SHIFT first; escalate to FAILOVER if corroborated and sustained [1].",
+        "Capacity exhaustion / hard gate => HOLD + load shed (controller action), avoid shifting into constrained region [1].",
+        "Control plane degradation => HOLD (do not flip rapidly; prevent oscillation) [1]."
+      ],
+      "verdicts": [
+        "partial",
+        "supported",
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "faithfulness": 0.9166666666666666
+    },
+    {
+      "question_id": "qst_0007",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The average triage rubric score decreased from 2.7 in the older baseline build to 1.9 in the newer optimized build in the first comparison run [1].",
+      "statements": [
+        "The average triage rubric score decreased from 2.7 in the older baseline build to 1.9 in the newer optimized build in the first comparison run [1]."
+      ],
+      "verdicts": [
+        "supported"
+      ],
+      "faithfulness": 1.0
+    },
+    {
+      "question_id": "qst_0008",
+      "set": "answerable",
+      "judge": "qwen3:4b-instruct-2507-q4_K_M",
+      "cites_expected": true,
+      "answer": "The target time-to-recover threshold for a verified rollback in staging is less than 10 minutes [1].",
+      "statements": [
+        "The target time-to-recover threshold for a verified rollback in staging is less than 10 minutes [1]."
+      ],
+      "verdicts": [
+        "partial"
+      ],
+      "faithfulness": 0.5
+    }
+  ]
+}
